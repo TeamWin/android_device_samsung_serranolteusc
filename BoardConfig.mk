@@ -36,6 +36,7 @@ BOARD_HAVE_NFC := true
 BOARD_HAVE_MULTI_COLOR_LED := true
 
 # RECOVERY TWRP
+#onlywhentwrping TARGET_RECOVERY_FSTAB := device/samsung/serranolteusc/twrp.fstab
 TARGET_RECOVERY_INITRC := device/samsung/serranolteusc/rootdir/init.recovery.rc
 DEVICE_RESOLUTION := 540x960
 RECOVERY_GRAPHICS_USE_LINELENGTH := true

@@ -20,12 +20,17 @@ $(call inherit-product, device/samsung/serrano-common/nfc.mk)
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/serranolteusc/overlay
 
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=SerranoLTEUSCRIL
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
 # Ramdisk with TWRP
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.carrier.rc:root/init.carrier.rc \
-    $(LOCAL_PATH)/twrp.fstab:root/etc/twrp.fstab
+    $(LOCAL_PATH)/rootdir/init.carrier.rc:root/init.carrier.rc 
+
+### $(LOCAL_PATH)/twrp.fstab:root/etc/twrp.fstab
 
