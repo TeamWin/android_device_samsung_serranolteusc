@@ -13,16 +13,16 @@
 # limitations under the License.
 #
 
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=SerranoLTEUSCRIL
+
 # Inherit from serrano-common
 $(call inherit-product, device/samsung/serrano-common/serrano-common.mk)
 $(call inherit-product, device/samsung/serrano-common/nfc.mk)
 
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/serranolteusc/overlay
-
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=SerranoLTEUSCRIL
 
 # Permissions
 PRODUCT_COPY_FILES += \

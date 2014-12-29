@@ -42,3 +42,5 @@ DEVICE_RESOLUTION := 540x960
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 ###TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
+# Custom RIL class
+BOARD_RIL_CLASS := ../../../device/samsung/serranolteusc/ril/
