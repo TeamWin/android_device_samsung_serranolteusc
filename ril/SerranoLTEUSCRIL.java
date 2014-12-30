@@ -310,21 +310,4 @@ public class SerranoLTEUSCRIL extends RIL {
         send(rr);
     }
 
-    @Override
-    protected Object
-    responseSMS(Parcel p) {
-
-        int messageRef, errorCode, errorClass;
-        String ackPDU;
-
-        messageRef = p.readInt();
-        ackPDU = p.readString();
-        errorCode = p.readInt();
-        errorClass = p.readInt();
-
-        SmsResponse response = new SmsResponse(messageRef, ackPDU, errorCode, errorClass);
-
-        return (Object)response;
-    }
-
 }
