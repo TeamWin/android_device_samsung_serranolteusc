@@ -22,7 +22,13 @@ $(call inherit-product, device/samsung/serrano-common/serrano-common.mk)
 $(call inherit-product, device/samsung/serrano-common/nfc.mk)
 
 # Device overlay
-DEVICE_PACKAGE_OVERLAYS += device/samsung/serranolteusc/overlay
+# Control all overlays here because we do not want the Mms xmls from qcom-common
+DEVICE_PACKAGE_OVERLAYS := device/samsung/serranolteusc/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/serrano-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/qcom-common/overlay/frameworks
+DEVICE_PACKAGE_OVERLAYS += device/samsung/qcom-common/overlay/packages/services
+DEVICE_PACKAGE_OVERLAYS += device/samsung/qcom-common/overlay/packages/apps/Contacts
+DEVICE_PACKAGE_OVERLAYS += device/samsung/msm8930-common/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
