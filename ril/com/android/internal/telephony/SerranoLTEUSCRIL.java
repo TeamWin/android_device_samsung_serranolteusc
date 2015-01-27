@@ -44,7 +44,12 @@ public class SerranoLTEUSCRIL extends RIL {
     private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
 
     public SerranoLTEUSCRIL(Context context, int networkMode, int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription);
+        super(context, networkMode, cdmaSubscription, null);
+        mQANElements = 6;
+    }
+
+    public SerranoLTEUSCRIL(Context context, int networkMode, int cdmaSubscription, Integer instanceId) {
+        super(context, networkMode, cdmaSubscription, instanceId);
         mQANElements = 6;
     }
 
