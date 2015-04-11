@@ -29,18 +29,29 @@ TARGET_OTA_ASSERT_DEVICE := serranolteusc,R890,SCH-R890
 # Kernel
 TARGET_KERNEL_VARIANT_CONFIG := msm8930_serrano_usc_defconfig
 
+# Audio - we inherrit serrano-common with legacy alsa
+# uncomment this if you want HAL but you will need a mixers.xml
+#BOARD_USES_LEGACY_ALSA_AUDIO := false
+
 # NFC
 BOARD_HAVE_NFC := true
 
 # LED
 BOARD_HAVE_MULTI_COLOR_LED := true
 
-# RECOVERY TWRP
-#onlywhentwrping TARGET_RECOVERY_FSTAB := device/samsung/serranolteusc/twrp.fstab
-TARGET_RECOVERY_INITRC := device/samsung/serranolteusc/rootdir/init.recovery.rc
+# RECOVERY TWRP ---------------------------------------------------------------------------------
+# Uncomment each one only when building: mka -j5 recoveryimage
+RECOVERY_VARIANT := twrp
+TARGET_RECOVERY_FSTAB := device/samsung/serranolteusc/twrp.fstab
+## no longer used##TARGET_RECOVERY_INITRC := device/samsung/serranolteusc/rootdir/init.recovery.rc
+## You should change the /etc/init.rc to use Samsung ids for USB so that Windows ADB works!
+## I wish they didn't take away the TARGET_RECOVERY_INITRC
 DEVICE_RESOLUTION := 540x960
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-###TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+# TWRP only works under permissive mode
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=23 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+# -----------------------------------------------------------------------------------------------
 
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/serranolteusc/ril/

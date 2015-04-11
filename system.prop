@@ -36,3 +36,8 @@ ro.gps.set_privacy=1
 dalvik.vm.dexopt-data-only=1
 telephony.sms.pseudo_multipart=1
 
+# TWRP
+service.adb.root=1
+sys.storage.ums_enabled=1
+sys.usb.config=mtp,adb
+ro.debuggable=1 
