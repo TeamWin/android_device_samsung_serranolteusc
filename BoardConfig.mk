@@ -41,16 +41,16 @@ BOARD_HAVE_MULTI_COLOR_LED := true
 
 # RECOVERY TWRP ---------------------------------------------------------------------------------
 # Uncomment each one only when building: mka -j5 recoveryimage
-RECOVERY_VARIANT := twrp
-TARGET_RECOVERY_FSTAB := device/samsung/serranolteusc/twrp.fstab
+#RECOVERY_VARIANT := twrp
+#TARGET_RECOVERY_FSTAB := device/samsung/serranolteusc/twrp.fstab
 ## no longer used##TARGET_RECOVERY_INITRC := device/samsung/serranolteusc/rootdir/init.recovery.rc
 ## You should change the /etc/init.rc to use Samsung ids for USB so that Windows ADB works!
 ## I wish they didn't take away the TARGET_RECOVERY_INITRC
-DEVICE_RESOLUTION := 540x960
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+#DEVICE_RESOLUTION := 540x960
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 # TWRP only works under permissive mode
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=23 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=23 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
 # -----------------------------------------------------------------------------------------------
 
 # Custom RIL class
