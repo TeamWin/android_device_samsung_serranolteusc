@@ -36,6 +36,8 @@ ro.gps.set_privacy=1
 dalvik.vm.dexopt-data-only=1
 telephony.sms.pseudo_multipart=1
 
+ro.config.vc_call_vol_steps=7
+
 # TWRP
 service.adb.root=1
 sys.storage.ums_enabled=1

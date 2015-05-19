@@ -17,16 +17,13 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SerranoLTEUSCRIL
 
-# Stock RIL and GPS files
+# Stock RIL, GPS, and audio files
 PRODUCT_COPY_FILES += \
     device/samsung/serranolteusc/proprietary/lib/libril.so:system/lib/libril.so \
     device/samsung/serranolteusc/proprietary/lib/libsec-ril.so:system/lib/libsec-ril.so \
     device/samsung/serranolteusc/proprietary/lib/libloc_api_v02.so:system/lib/libloc_api_v02.so \
+    device/samsung/serranolteusc/proprietary/lib/libaudcal.so:system/lib/libaudcal.so \
     device/samsung/serranolteusc/proprietary/vendor/lib/liblbs_core.so:system/vendor/lib/liblbs_core.so 
-
-# Sound
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
 
 # Inherit from serrano-common
 $(call inherit-product, device/samsung/serrano-common/serrano-common.mk)
