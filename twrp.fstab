@@ -1,0 +1,13 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+/system          ext4        /dev/block/platform/msm_sdcc.1/by-name/system
+/cache           ext4        /dev/block/platform/msm_sdcc.1/by-name/cache
+/data            ext4        /dev/block/platform/msm_sdcc.1/by-name/userdata length=-16384
+/boot            emmc        /dev/block/platform/msm_sdcc.1/by-name/boot
+/recovery        emmc        /dev/block/platform/msm_sdcc.1/by-name/recovery
+/external_sd     vfat        /dev/block/mmcblk1p1    /dev/block/mmcblk1       flags=display="Micro SDcard";storage;wipeingui;removable
+/usbdisk         auto        /devices/platform/msm_hsusb_host/usb1            flags=display="USB";storage;wipeingui;removable
+/usb-otg         vfat        /dev/block/sda1         /dev/block/sda           flags=display="USB-OTG";storage;wipeingui;removable
+
