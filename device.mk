@@ -44,7 +44,5 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.carrier.rc:root/init.carrier.rc 
-
-
-
+    $(LOCAL_PATH)/rootdir/init.carrier.rc:root/init.carrier.rc \
+    $(LOCAL_PATH)/rootdir/stock_file_contexts:root/prebuilt_file_contexts
