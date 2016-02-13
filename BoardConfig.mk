@@ -43,6 +43,9 @@ DEVICE_RESOLUTION := 540x960
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=23 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+
+# For debugging decrypt in twrp only!
+#TARGET_USES_LOGD := true 
 # -----------------------------------------------------------------------------------------------
 
 # Custom RIL class
