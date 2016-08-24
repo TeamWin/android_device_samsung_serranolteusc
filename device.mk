@@ -42,9 +42,3 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/msm8930-common/overlay
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
-# Ramdisk 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.carrier.rc:root/init.carrier.rc 
-
-
-

@@ -20,6 +20,7 @@ import static com.android.internal.telephony.RILConstants.*;
 
 import android.content.Context;
 import android.telephony.Rlog;
+import android.os.AsyncResult;
 import android.os.Message;
 import android.os.Parcel;
 import android.telephony.PhoneNumberUtils;
@@ -31,6 +32,7 @@ import java.util.Collections;
 import com.android.internal.telephony.cdma.CdmaInformationRecords;
 import com.android.internal.telephony.cdma.CdmaInformationRecords.CdmaSignalInfoRec;
 import com.android.internal.telephony.cdma.SignalToneUtil;
+import android.os.SystemProperties;
 
 /**
  * RIL customization for Galaxy S4 Mini (LTE USC) device
@@ -46,14 +48,12 @@ public class SerranoLTEUSCRIL extends RIL {
     private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
     private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
 
-    public SerranoLTEUSCRIL(Context context, int networkMode, int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription, null);
-        mQANElements = 6;
+    public SerranoLTEUSCRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+        super(context, preferredNetworkType, cdmaSubscription, null);
     }
 
-    public SerranoLTEUSCRIL(Context context, int networkMode, int cdmaSubscription, Integer instanceId) {
-        super(context, networkMode, cdmaSubscription, instanceId);
-        mQANElements = 6;
+    public SerranoLTEUSCRIL(Context context, int preferredNetworkType, int cdmaSubscription, Integer instanceId) {
+        super(context, preferredNetworkType, cdmaSubscription, instanceId);
     }
 
     @Override
@@ -269,6 +269,115 @@ public class SerranoLTEUSCRIL extends RIL {
     }
 
     @Override
+    protected RILRequest
+    processSolicited (Parcel p) {
+        int serial, error, request;
+        RILRequest rr;
+        int dataPosition = p.dataPosition(); // save off position within the Parcel
+
+        serial = p.readInt();
+        error = p.readInt();
+
+        rr = mRequestList.get(serial);
+        if (rr == null || error != 0 || p.dataAvail() <= 0) {
+            p.setDataPosition(dataPosition);
+            return super.processSolicited(p);
+        }
+
+        try { switch (rr.mRequest) {
+            case RIL_REQUEST_OPERATOR:
+                String operators[] = (String [])responseStrings(p);
+
+                Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: Operator response");
+       
+                if (operators == null || operators.length < 0) {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: operators is empty or null");
+                } else {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: length of operators:"+operators.length);
+                   for (int i = 0; i < operators.length; i++) {
+                      Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: operator["+i+"]:"+operators[i]);
+                   }
+                } 
+
+                Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: Forcing operator name using build property ro.cdma.home.operator.alpha");
+                operators[0] = SystemProperties.get("ro.cdma.home.operator.alpha");
+
+                if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
+                                + " " + retToString(rr.mRequest, operators));
+
+                if (rr.mResult != null) {
+                        AsyncResult.forMessage(rr.mResult, operators, null);
+                        rr.mResult.sendToTarget();
+                }
+                mRequestList.remove(serial);
+                break;
+            case RIL_REQUEST_VOICE_REGISTRATION_STATE:
+                String voiceRegStates[] = (String [])responseStrings(p);
+
+                Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: VoiceRegistrationState response");
+
+                if (voiceRegStates == null || voiceRegStates.length < 0) {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: voiceRegStates is empty or null");
+                } else {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: length of voiceRegStates:"+voiceRegStates.length);
+                   for (int i = 0; i < voiceRegStates.length; i++) {
+                      Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: voiceRegStates["+i+"]:"+voiceRegStates[i]);
+                   }
+                }
+ 
+                if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
+                                + " " + retToString(rr.mRequest, voiceRegStates));
+
+                if (rr.mResult != null) {
+                        AsyncResult.forMessage(rr.mResult, voiceRegStates, null);
+                        rr.mResult.sendToTarget();
+                }
+                mRequestList.remove(serial);
+                break;
+             case RIL_REQUEST_DATA_REGISTRATION_STATE:
+                String dataRegStates[] = (String [])responseStrings(p);
+
+                Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: DataRegistrationState response");
+               
+                if (dataRegStates == null || dataRegStates.length < 0) {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: dataRegStates is empty or null");
+                } else {
+                   Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: length of dataRegStates:"+dataRegStates.length);
+                   for (int i = 0; i < dataRegStates.length; i++) {
+                      Rlog.v(RILJ_LOG_TAG, "SerranoLTEUSCRIL: dataRegStates["+i+"]:"+dataRegStates[i]);
+                   }
+                }
+  
+                if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
+                                + " " + retToString(rr.mRequest, dataRegStates));
+
+                if (rr.mResult != null) {
+                        AsyncResult.forMessage(rr.mResult, dataRegStates, null);
+                        rr.mResult.sendToTarget();
+                }
+                mRequestList.remove(serial);
+                break;
+            default:
+                p.setDataPosition(dataPosition);
+                return super.processSolicited(p);
+        }} catch (Throwable tr) {
+                // Exceptions here usually mean invalid RIL responses
+
+                Rlog.w(RILJ_LOG_TAG, rr.serialString() + "< "
+                                + requestToString(rr.mRequest)
+                                + " exception, possible invalid RIL response", tr);
+
+                if (rr.mResult != null) {
+                        AsyncResult.forMessage(rr.mResult, null, tr);
+                        rr.mResult.sendToTarget();
+                }
+                return rr;
+        }
+
+        return rr;
+    }
+
+    @Override
     protected void
     processUnsolicited (Parcel p) {
         Object ret;
@@ -298,6 +407,19 @@ public class SerranoLTEUSCRIL extends RIL {
                 // Forward responses that we are not overriding to the super class
                 super.processUnsolicited(p);
                 return;
+        }
+    }
+
+    // This call causes ril to crash the socket, stopping further communication
+    @Override
+    public void
+    getHardwareConfig (Message result) {
+        riljLog("Ignoring call to 'getHardwareConfig'");
+        if (result != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, ex);
+            result.sendToTarget();
         }
     }
 
@@ -379,5 +501,60 @@ public class SerranoLTEUSCRIL extends RIL {
        super.notifyRegistrantsCdmaInfoRec(infoRec);
    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void getCellInfoList(Message result) {
+        riljLog("getCellInfoList: not supported");
+        if (result != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, ex);
+            result.sendToTarget();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCellInfoListRate(int rateInMillis, Message response) {
+        riljLog("setCellInfoListRate: not supported");
+        if (response != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, ex);
+            response.sendToTarget();
+        }
+    }
+
+    @Override
+    public void getRadioCapability(Message response) {
+       riljLog("getRadioCapability: returning static radio capability");
+       if (response != null) {
+           Object ret = makeStaticRadioCapability();
+           AsyncResult.forMessage(response, ret, null);
+           response.sendToTarget();
+       }
+    }
+
+    protected Object
+    responseFailCause(Parcel p) {
+        int numInts;
+        int response[];
+
+        numInts = p.readInt();
+        response = new int[numInts];
+        for (int i = 0 ; i < numInts ; i++) {
+            response[i] = p.readInt();
+        }
+        LastCallFailCause failCause = new LastCallFailCause();
+        failCause.causeCode = response[0];
+        if (p.dataAvail() > 0) {
+          failCause.vendorCause = p.readString();
+        }
+        return failCause;
+    }  
 }
 
