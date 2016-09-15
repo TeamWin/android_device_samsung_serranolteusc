@@ -271,7 +271,7 @@ public class SerranoLTEUSCRIL extends RIL {
 
     @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited (Parcel p, int type) {
         int serial, error, request;
         RILRequest rr;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
@@ -282,7 +282,7 @@ public class SerranoLTEUSCRIL extends RIL {
         rr = mRequestList.get(serial);
         if (rr == null || error != 0 || p.dataAvail() <= 0) {
             p.setDataPosition(dataPosition);
-            return super.processSolicited(p);
+            return super.processSolicited(p, type);
         }
 
         try { switch (rr.mRequest) {
@@ -360,7 +360,7 @@ public class SerranoLTEUSCRIL extends RIL {
                 break;
             default:
                 p.setDataPosition(dataPosition);
-                return super.processSolicited(p);
+                return super.processSolicited(p, type);
         }} catch (Throwable tr) {
                 // Exceptions here usually mean invalid RIL responses
 
