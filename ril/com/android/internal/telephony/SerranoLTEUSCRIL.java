@@ -183,18 +183,18 @@ public class SerranoLTEUSCRIL extends RIL {
             if (uusInfoPresent == 1) {
                 dc.uusInfo = new UUSInfo();
                 dc.uusInfo.setType(p.readInt());
-                riljLogv("dc.uusInfo.Type: " + dc.uusInfo.getType());
+                //riljLogv("dc.uusInfo.Type: " + dc.uusInfo.getType());
                 dc.uusInfo.setDcs(p.readInt());
-                riljLogv("dc.uusInfo.Dcs: " + dc.uusInfo.getDcs());
+                //riljLogv("dc.uusInfo.Dcs: " + dc.uusInfo.getDcs());
                 byte[] userData = p.createByteArray();
                 dc.uusInfo.setUserData(userData);
-                riljLogv(String.format("Incoming UUS : type=%d, dcs=%d, length=%d",
-                                dc.uusInfo.getType(), dc.uusInfo.getDcs(),
-                                dc.uusInfo.getUserData().length));
-                riljLogv("Incoming UUS : data (string)="
-                        + new String(dc.uusInfo.getUserData()));
-                riljLogv("Incoming UUS : data (hex): "
-                        + IccUtils.bytesToHexString(dc.uusInfo.getUserData()));
+                //riljLogv(String.format("Incoming UUS : type=%d, dcs=%d, length=%d",
+                //                dc.uusInfo.getType(), dc.uusInfo.getDcs(),
+                //                dc.uusInfo.getUserData().length));
+                //riljLogv("Incoming UUS : data (string)="
+                //        + new String(dc.uusInfo.getUserData()));
+                //riljLogv("Incoming UUS : data (hex): "
+                //        + IccUtils.bytesToHexString(dc.uusInfo.getUserData()));
             } else {
                 riljLogv("Incoming UUS : NOT present!");
             }
