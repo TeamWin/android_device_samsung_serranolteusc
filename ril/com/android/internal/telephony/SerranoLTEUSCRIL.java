@@ -572,5 +572,4 @@ public class SerranoLTEUSCRIL extends RIL {
         }
     }
 }
-}
 
