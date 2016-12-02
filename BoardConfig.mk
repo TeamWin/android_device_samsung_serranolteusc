@@ -26,6 +26,9 @@
 # Assert
 TARGET_OTA_ASSERT_DEVICE := serranolteusc,R890,SCH-R890
 
+# Inherit from proprietary vendor
+-include vendor/samsung/serranolteusc/BoardConfigVendor.mk
+
 # Kernel
 TARGET_KERNEL_VARIANT_CONFIG := msm8930_serrano_usc_defconfig
 
