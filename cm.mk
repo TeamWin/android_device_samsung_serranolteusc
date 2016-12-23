@@ -15,7 +15,7 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from serranoltexx device
+# Inherit from serranolteusc device
 $(call inherit-product, device/samsung/serranolteusc/device.mk)
 
 # Inherit some common CM stuff.
