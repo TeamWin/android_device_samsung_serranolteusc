@@ -1,4 +1,5 @@
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2013-2016, The CyanogenMod Project
+# Copyright (C) 2017, The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,3 +41,8 @@ BOARD_HAVE_MULTI_COLOR_LED := true
 
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/serranolteusc/ril/
+
+ifeq ($(WITH_TWRP),true)
+   TARGET_RECOVERY_DEVICE_DIRS += device/samsung/serranolteusc
+   TARGET_RECOVERY_FSTAB += device/samsung/serranolteusc/rootdir/twrp.fstab
+endif

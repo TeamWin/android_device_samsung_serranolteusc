@@ -1,1 +1,1 @@
-add_lunch_combo cm_serranolteusc-userdebug
+add_lunch_combo lineageos_serranolteusc-userdebug
