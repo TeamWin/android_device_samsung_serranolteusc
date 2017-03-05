@@ -22,7 +22,7 @@ $(call inherit-product, device/samsung/serranolteusc/device.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineageos_serranolteusc
+PRODUCT_NAME := lineage_serranolteusc
 PRODUCT_DEVICE := serranolteusc
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := Samsung
