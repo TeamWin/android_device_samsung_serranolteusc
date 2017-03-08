@@ -21,6 +21,10 @@
 # definition file).
 #
 
+ifeq ($(RECOVERY_VARIANT),twrp)
+   WITH_TWRP := true
+endif
+
 # Inherit from common serrano
 -include device/samsung/serrano-common/BoardConfigCommon.mk
 
