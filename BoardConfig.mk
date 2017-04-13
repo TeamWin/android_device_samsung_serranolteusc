@@ -43,6 +43,9 @@ BOARD_HAVE_NFC := true
 # LED
 BOARD_HAVE_MULTI_COLOR_LED := true
 
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/serranolteusc/ril/
 
